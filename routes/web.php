@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\Route;
 // Frontend Routes
 Route::get('/', [HomeController::class, 'index']);
 Route::get('/news/{slug}', [HomeController::class, 'show'])->name('news.detail');
+Route::get('/category/{slug}', [HomeController::class, 'category'])->name('category.detail');
 
 // Auth Routes
 Route::middleware('guest')->group(function () {

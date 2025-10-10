@@ -14,23 +14,40 @@ class HomeController extends Controller
     {
         $news = News::where('slug', $slug)->firstOrFail();
         
-        // Increment views
+       
         $news->increment('views');
 
-        // Get related news from same category
+       
         $relatedNews = News::where('category_id', $news->category_id)
             ->where('id', '!=', $news->id)
             ->latest()
             ->take(6)
             ->get();
 
-        // Get popular news
+     
         $popularNews = News::orderBy('views', 'desc')
             ->take(3)
             ->get();
 
         return view('frontend.pages.detail-news', compact('news', 'relatedNews', 'popularNews'));
     }
+    public function category($slug)
+    {
+        $category = DB::table('categories')->where('slug', $slug)->first();
+        
+        if (!$category) {
+            abort(404);
+        }
+
+        $news = News::whereHas('category', function($q) use ($slug) {
+            $q->where('slug', $slug);
+        })->latest()->paginate(12);
+
+        $popularNews = News::orderBy('views', 'desc')->take(5)->get();
+
+        return view('frontend.pages.detail-category', compact('category', 'news', 'popularNews'));
+    }
+
     public function index()
     {
         $featuredNews = News::where('is_featured', true)->latest()->take(3)->get();
@@ -38,10 +55,8 @@ class HomeController extends Controller
         $popularNews = News::orderBy('views', 'desc')->take(4)->get();
         $latestVideos = Video::latest()->take(4)->get();
         
-        // Gunakan query builder untuk menghindari soft delete
         $categories = DB::table('categories')->get();
 
-        // Get news by category
         $polriNews = News::whereHas('category', function($q) {
             $q->where('slug', 'polri');
         })->latest()->take(3)->get();

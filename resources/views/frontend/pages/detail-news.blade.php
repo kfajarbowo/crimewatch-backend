@@ -50,7 +50,7 @@
 
                     <!-- Article Text -->
                     <div class="prose max-w-none">
-                        {!! $news->content !!}
+                        {!! $news->rendered_content !!}
                     </div>
 
                     <!-- Tags -->
@@ -112,3 +112,4 @@
         </div>
     </main>
 @endsection
+  
