@@ -160,8 +160,8 @@ use Illuminate\Support\Str;
                                 </td>
                                 <td class="px-4 sm:px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
                                     <div class="flex items-center justify-end space-x-2">
-                                        <a href="{{ route('news.detail', $item->slug) }}" 
-                                           class="text-blue-600 hover:text-blue-900 font-medium" target="_blank">
+                                        <a href="{{ route('admin.news.show', $item->id) }}" 
+                                           class="text-blue-600 hover:text-blue-900 font-medium">
                                             View
                                         </a>
                                         <span class="text-gray-300">|</span>

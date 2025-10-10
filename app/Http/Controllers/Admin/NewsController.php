@@ -19,6 +19,12 @@ class NewsController extends Controller
         return view('admin.news.index', compact('news'));
     }
 
+    public function show(News $news)
+    {
+        $news->load('category');
+        return view('admin.news.show', compact('news'));
+    }
+
     public function create()
     {
         $categories = Category::all();

@@ -17,7 +17,16 @@
                 <article class="bg-white rounded-lg p-4 md:p-6 mb-8">
                     <!-- Article Header -->
                     <div class="mb-6">
-                        <h1 class="text-2xl md:text-3xl font-bold mb-3">{{ $news->title }}</h1>
+                        <div class="flex items-start justify-between mb-3">
+                            <h1 class="text-2xl md:text-3xl font-bold flex-1 pr-4">{{ $news->title }}</h1>
+                            <div class="flex items-center text-sm text-gray-500 bg-gray-100 px-3 py-1 rounded-full">
+                                <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/>
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/>
+                                </svg>
+                                <span>{{ $news->views }} views</span>
+                            </div>
+                        </div>
                         <div class="flex items-center justify-between flex-wrap gap-4">
                             <div class="flex flex-col text-sm text-gray-500 space-y-1">
                                 <span>{{ $news->created_at?->translatedFormat('l, d F Y - H:i') }} WIB</span>
