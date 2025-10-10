@@ -18,7 +18,7 @@
                                         <div class="absolute bottom-0 left-0 right-0 p-3 sm:p-4 lg:p-6 bg-gradient-to-t from-black via-black/70 to-transparent text-white">
                                             <span class="inline-block text-red-400 font-medium text-xs sm:text-sm border-b-2 border-yellow-500 pb-1 mb-2 sm:mb-3">{{ $news->category->name }}</span>
                                             <h1 class="text-lg sm:text-xl lg:text-2xl font-bold mb-1 sm:mb-2 line-clamp-2">{{ $news->title }}</h1>
-                                            <p class="text-xs sm:text-sm text-gray-200">{{ $news->created_at->translatedFormat('l, d F Y') }}</p>
+                                            <p class="text-xs sm:text-sm text-gray-200">{{ $news->created_at->locale('id')->translatedFormat('l, d F Y') }}</p>
                                         </div>
                                     </div>
                                 </a>
@@ -61,7 +61,7 @@
                                     <span class="text-[10px] sm:text-xs text-red-600 font-medium border-b-2 border-yellow-500 pb-1">{{ $news->category->name }}</span>
                                 </div>
                                 <h3 class="font-medium text-xs sm:text-sm mt-1 group-hover:text-red-600 transition-colors line-clamp-2">{{ $news->title }}</h3>
-                                <span class="text-[10px] sm:text-xs text-gray-500 line-clamp-1 mt-1">{{ $news->created_at->translatedFormat('d F Y') }}</span>
+                                <span class="text-[10px] sm:text-xs text-gray-500 line-clamp-1 mt-1">{{ $news->created_at->locale('id')->translatedFormat('d F Y') }}</span>
                             </div>
                         </a>
                     @endforeach
@@ -135,7 +135,7 @@
                                 <div class="flex-1 p-3 sm:p-4">
                                     <span class="inline-block text-xs sm:text-sm text-red-600 font-medium border-b-2 border-yellow-500 pb-1">{{ $news->category->name }}</span>
                                     <h3 class="font-bold text-sm sm:text-base lg:text-lg mt-1 mb-1 sm:mb-2 group-hover:text-red-600 transition-colors line-clamp-2">{{ $news->title }}</h3>
-                                    <p class="text-xs sm:text-sm text-gray-500">{{ $news->created_at->translatedFormat('l, d F Y - H:i') }} WIB</p>
+                                    <p class="text-xs sm:text-sm text-gray-500">{{ $news->created_at->locale('id')->translatedFormat('l, d F Y - H:i') }} WIB</p>
                                 </div>
                             </div>
                         </a>
@@ -150,7 +150,7 @@
             <div class="mb-6 sm:mb-8">
                 <div class="flex justify-between items-center mb-3 sm:mb-4">
                     <h2 class="text-lg sm:text-xl font-bold text-red-600">POLRI</h2>
-                    <a href="{{ url('/category/polri') }}" class="text-gray-500 text-xs sm:text-sm hover:text-red-600 whitespace-nowrap">Selengkapnya →</a>
+                    <a href="{{ route('category.detail', 'polri') }}" class="text-gray-500 text-xs sm:text-sm hover:text-red-600 whitespace-nowrap">Selengkapnya →</a>
                 </div>
                 <div class="space-y-3 sm:space-y-4">
                     @foreach($polriNews as $news)
@@ -160,7 +160,7 @@
                             </div>
                             <div class="flex-1 min-w-0">
                                 <h3 class="font-medium text-xs sm:text-sm mb-1 line-clamp-2">{{ $news->title }}</h3>
-                                <p class="text-xs text-gray-500">{{ $news->created_at->translatedFormat('l, d F Y - H:i') }} WIB</p>
+                                <p class="text-xs text-gray-500">{{ $news->created_at->locale('id')->translatedFormat('l, d F Y - H:i') }} WIB</p>
                             </div>
                         </div>
                     @endforeach
@@ -171,7 +171,7 @@
             <div class="mb-6 sm:mb-8">
                 <div class="flex justify-between items-center mb-3 sm:mb-4">
                     <h2 class="text-lg sm:text-xl font-bold text-red-600">KRIMINAL</h2>
-                    <a href="{{ url('/category/kriminal') }}" class="text-gray-500 text-xs sm:text-sm hover:text-red-600 whitespace-nowrap">Selengkapnya →</a>
+                    <a href="{{ route('category.detail', 'kriminal') }}" class="text-gray-500 text-xs sm:text-sm hover:text-red-600 whitespace-nowrap">Selengkapnya →</a>
                 </div>
                 <div class="space-y-3 sm:space-y-4">
                     @foreach($kriminalNews as $news)
@@ -181,7 +181,7 @@
                             </div>
                             <div class="flex-1 min-w-0">
                                 <h3 class="font-medium text-xs sm:text-sm mb-1 line-clamp-2">{{ $news->title }}</h3>
-                                <p class="text-xs text-gray-500">{{ $news->created_at->translatedFormat('l, d F Y - H:i') }} WIB</p>
+                                <p class="text-xs text-gray-500">{{ $news->created_at->locale('id')->translatedFormat('l, d F Y - H:i') }} WIB</p>
                             </div>
                         </div>
                     @endforeach
@@ -196,7 +196,7 @@
         <div>
             <div class="flex justify-between items-center mb-3 sm:mb-4">
                 <h2 class="text-lg sm:text-xl font-bold text-red-600">BHABIN</h2>
-                <a href="#" class="text-gray-500 text-xs sm:text-sm hover:text-red-600 whitespace-nowrap">Selengkapnya →</a>
+                <a href="{{ route('category.detail', 'bhabin') }}" class="text-gray-500 text-xs sm:text-sm hover:text-red-600 whitespace-nowrap">Selengkapnya →</a>
             </div>
             @if($bhabinNews->isNotEmpty())
                 <!-- Main Article -->
@@ -206,7 +206,7 @@
                             <img src="{{ $bhabinNews[0]->image_url }}" alt="{{ $bhabinNews[0]->title }}" class="w-full h-full object-cover rounded-lg">
                         </div>
                         <h3 class="font-bold text-sm sm:text-base lg:text-lg mb-1 sm:mb-2 group-hover:text-red-600 transition-colors line-clamp-2">{{ $bhabinNews[0]->title }}</h3>
-                        <p class="text-xs sm:text-sm text-gray-500">{{ $bhabinNews[0]->created_at->translatedFormat('l, d F Y - H:i') }} WIB</p>
+                        <p class="text-xs sm:text-sm text-gray-500">{{ $bhabinNews[0]->created_at->locale('id')->translatedFormat('l, d F Y - H:i') }} WIB</p>
                     </a>
                 </article>
                 <!-- Child Articles -->
@@ -217,7 +217,7 @@
                                 <img src="{{ $news->image_url }}" alt="{{ $news->title }}" class="w-16 h-12 sm:w-20 sm:h-15 rounded object-cover bg-gray-200 flex-shrink-0">
                                 <div class="min-w-0">
                                     <h4 class="font-medium text-xs sm:text-sm group-hover:text-red-600 transition-colors line-clamp-2">{{ $news->title }}</h4>
-                                    <p class="text-xs text-gray-500 mt-1">{{ $news->created_at->translatedFormat('l, d F Y - H:i') }} WIB</p>
+                                    <p class="text-xs text-gray-500 mt-1">{{ $news->created_at->locale('id')->translatedFormat('l, d F Y - H:i') }} WIB</p>
                                 </div>
                             </a>
                         </article>
@@ -230,7 +230,7 @@
         <div>
             <div class="flex justify-between items-center mb-3 sm:mb-4">
                 <h2 class="text-lg sm:text-xl font-bold text-red-600">LANTAS</h2>
-                    <a href="{{ url('/category/lantas') }}" class="text-gray-500 text-xs sm:text-sm hover:text-red-600 whitespace-nowrap">Selengkapnya →</a>
+                <a href="{{ route('category.detail', 'lantas') }}" class="text-gray-500 text-xs sm:text-sm hover:text-red-600 whitespace-nowrap">Selengkapnya →</a>
             </div>
             @if($lantasNews->isNotEmpty())
                 <!-- Main Article -->
@@ -240,7 +240,7 @@
                             <img src="{{ $lantasNews[0]->image_url }}" alt="{{ $lantasNews[0]->title }}" class="w-full h-full object-cover rounded-lg">
                         </div>
                         <h3 class="font-bold text-sm sm:text-base lg:text-lg mb-1 sm:mb-2 group-hover:text-red-600 transition-colors line-clamp-2">{{ $lantasNews[0]->title }}</h3>
-                        <p class="text-xs sm:text-sm text-gray-500">{{ $lantasNews[0]->created_at->translatedFormat('l, d F Y - H:i') }} WIB</p>
+                        <p class="text-xs sm:text-sm text-gray-500">{{ $lantasNews[0]->created_at->locale('id')->translatedFormat('l, d F Y - H:i') }} WIB</p>
                     </a>
                 </article>
                 <!-- Child Articles -->
@@ -251,7 +251,7 @@
                                 <img src="{{ $news->image_url }}" alt="{{ $news->title }}" class="w-16 h-12 sm:w-20 sm:h-15 rounded object-cover bg-gray-200 flex-shrink-0">
                                 <div class="min-w-0">
                                     <h4 class="font-medium text-xs sm:text-sm group-hover:text-red-600 transition-colors line-clamp-2">{{ $news->title }}</h4>
-                                    <p class="text-xs text-gray-500 mt-1">{{ $news->created_at->translatedFormat('l, d F Y - H:i') }} WIB</p>
+                                    <p class="text-xs text-gray-500 mt-1">{{ $news->created_at->locale('id')->translatedFormat('l, d F Y - H:i') }} WIB</p>
                                 </div>
                             </a>
                         </article>
@@ -264,7 +264,7 @@
         <div>
             <div class="flex justify-between items-center mb-3 sm:mb-4">
                 <h2 class="text-lg sm:text-xl font-bold text-red-600">POLITIK</h2>
-                    <a href="{{ url('/category/politik') }}" class="text-gray-500 text-xs sm:text-sm hover:text-red-600 whitespace-nowrap">Selengkapnya →</a>
+                <a href="{{ route('category.detail', 'politik') }}" class="text-gray-500 text-xs sm:text-sm hover:text-red-600 whitespace-nowrap">Selengkapnya →</a>
             </div>
             @if($politikNews->isNotEmpty())
                 <!-- Main Article -->
@@ -274,7 +274,7 @@
                             <img src="{{ $politikNews[0]->image_url }}" alt="{{ $politikNews[0]->title }}" class="w-full h-full object-cover rounded-lg">
                         </div>
                         <h3 class="font-bold text-sm sm:text-base lg:text-lg mb-1 sm:mb-2 group-hover:text-red-600 transition-colors line-clamp-2">{{ $politikNews[0]->title }}</h3>
-                        <p class="text-xs sm:text-sm text-gray-500">{{ $politikNews[0]->created_at->translatedFormat('l, d F Y - H:i') }} WIB</p>
+                        <p class="text-xs sm:text-sm text-gray-500">{{ $politikNews[0]->created_at->locale('id')->translatedFormat('l, d F Y - H:i') }} WIB</p>
                     </a>
                 </article>
                 <!-- Child Articles -->
@@ -285,7 +285,7 @@
                                 <img src="{{ $news->image_url }}" alt="{{ $news->title }}" class="w-16 h-12 sm:w-20 sm:h-15 rounded object-cover bg-gray-200 flex-shrink-0">
                                 <div class="min-w-0">
                                     <h4 class="font-medium text-xs sm:text-sm group-hover:text-red-600 transition-colors line-clamp-2">{{ $news->title }}</h4>
-                                    <p class="text-xs text-gray-500 mt-1">{{ $news->created_at->translatedFormat('l, d F Y - H:i') }} WIB</p>
+                                    <p class="text-xs text-gray-500 mt-1">{{ $news->created_at->locale('id')->translatedFormat('l, d F Y - H:i') }} WIB</p>
                                 </div>
                             </a>
                         </article>

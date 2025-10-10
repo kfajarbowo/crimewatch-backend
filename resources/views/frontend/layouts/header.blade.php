@@ -1,3 +1,6 @@
+@php
+use Illuminate\Support\Facades\Auth;
+@endphp
 <!-- Mobile Menu Overlay -->
 <div id="mobile-overlay" class="fixed inset-0 bg-black bg-opacity-50 z-40 hidden" onclick="closeMobileMenu()"></div>
 
@@ -36,9 +39,21 @@
                         </svg>
                     </button>
                 </div>
-                <a href="{{ route('login') }}" class="w-full bg-red-700 text-white px-6 py-2 rounded-full font-medium hover:bg-red-800 block text-center">
-                    Masuk
-                </a>
+                @auth
+                    <div class="space-y-2">
+                        <p class="text-sm text-gray-600">Selamat datang, <span class="font-semibold">{{ Auth::user()->name }}</span></p>
+                        <form method="POST" action="{{ route('logout') }}" class="w-full">
+                            @csrf
+                            <button type="submit" class="w-full bg-red-700 text-white px-6 py-2 rounded-full font-medium hover:bg-red-800 block text-center">
+                                Logout
+                            </button>
+                        </form>
+                    </div>
+                @else
+                    <a href="{{ route('login') }}" class="w-full bg-red-700 text-white px-6 py-2 rounded-full font-medium hover:bg-red-800 block text-center">
+                        Masuk
+                    </a>
+                @endauth
             </div>
         </div>
 
@@ -46,13 +61,13 @@
         <nav class="flex-1 overflow-y-auto">
             <ul class="px-4 py-2 space-y-1">
                 <li><a href="/" class="text-gray-800 py-3 block hover:text-red-600 font-medium text-sm border-b">NEWS</a></li>
-                <li><a href="#polri" class="text-gray-800 py-3 block hover:text-red-600 font-medium text-sm border-b">POLRI</a></li>
-                <li><a href="#kriminal" class="text-gray-800 py-3 block hover:text-red-600 font-medium text-sm border-b">KRIMINAL</a></li>
-                <li><a href="#bhabin" class="text-gray-800 py-3 block hover:text-red-600 font-medium text-sm border-b">BHABIN</a></li>
-                <li><a href="#lantas" class="text-gray-800 py-3 block hover:text-red-600 font-medium text-sm border-b">LANTAS</a></li>
-                <li><a href="#politik" class="text-gray-800 py-3 block hover:text-red-600 font-medium text-sm border-b">POLITIK</a></li>
-                <li><a href="#ragam" class="text-gray-800 py-3 block hover:text-red-600 font-medium text-sm border-b">RAGAM</a></li>
-                <li><a href="#indeks" class="text-gray-800 py-3 block hover:text-red-600 font-medium text-sm border-b">INDEKS</a></li>
+                <li><a href="{{ route('category.detail', 'polri') }}" class="text-gray-800 py-3 block hover:text-red-600 font-medium text-sm border-b">POLRI</a></li>
+                <li><a href="{{ route('category.detail', 'kriminal') }}" class="text-gray-800 py-3 block hover:text-red-600 font-medium text-sm border-b">KRIMINAL</a></li>
+                <li><a href="{{ route('category.detail', 'bhabin') }}" class="text-gray-800 py-3 block hover:text-red-600 font-medium text-sm border-b">BHABIN</a></li>
+                <li><a href="{{ route('category.detail', 'lantas') }}" class="text-gray-800 py-3 block hover:text-red-600 font-medium text-sm border-b">LANTAS</a></li>
+                <li><a href="{{ route('category.detail', 'politik') }}" class="text-gray-800 py-3 block hover:text-red-600 font-medium text-sm border-b">POLITIK</a></li>
+                <li><a href="{{ route('category.detail', 'ragam') }}" class="text-gray-800 py-3 block hover:text-red-600 font-medium text-sm border-b">RAGAM</a></li>
+                <li><a href="{{ route('category.detail', 'indeks') }}" class="text-gray-800 py-3 block hover:text-red-600 font-medium text-sm border-b">INDEKS</a></li>
             </ul>
         </nav>
     </div>
@@ -93,9 +108,21 @@
                             </svg>
                         </button>
                     </div>
-                    <a href="{{ route('login') }}" class="bg-white text-red-700 px-6 py-2 rounded-full font-medium hover:bg-gray-100">
-                        Masuk
-                    </a>
+                    @auth
+                        <div class="flex items-center space-x-3">
+                            <span class="text-white text-sm">Selamat datang, <span class="font-semibold">{{ Auth::user()->name }}</span></span>
+                            <form method="POST" action="{{ route('logout') }}">
+                                @csrf
+                                <button type="submit" class="bg-white text-red-700 px-4 py-2 rounded-full font-medium hover:bg-gray-100 text-sm">
+                                    Logout
+                                </button>
+                            </form>
+                        </div>
+                    @else
+                        <!-- <a href="{{ route('login') }}" class="bg-white text-red-700 px-6 py-2 rounded-full font-medium hover:bg-gray-100">
+                            
+                        </a> -->
+                    @endauth
                 </div>
             </div>
         </div>
@@ -106,13 +133,13 @@
         <div class="container mx-auto">
             <ul class="flex justify-center space-x-8 lg:space-x-12">
                 <li><a href="/" class="text-white py-3 inline-block hover:text-yellow-500 font-medium text-sm tracking-wide">NEWS</a></li>
-                <li><a href="#polri" class="text-white py-3 inline-block hover:text-yellow-500 font-medium text-sm tracking-wide">POLRI</a></li>
-                <li><a href="#kriminal" class="text-white py-3 inline-block hover:text-yellow-500 font-medium text-sm tracking-wide">KRIMINAL</a></li>
-                <li><a href="#bhabin" class="text-white py-3 inline-block hover:text-yellow-500 font-medium text-sm tracking-wide">BHABIN</a></li>
-                <li><a href="#lantas" class="text-white py-3 inline-block hover:text-yellow-500 font-medium text-sm tracking-wide">LANTAS</a></li>
-                <li><a href="#politik" class="text-white py-3 inline-block hover:text-yellow-500 font-medium text-sm tracking-wide">POLITIK</a></li>
-                <li><a href="#ragam" class="text-white py-3 inline-block hover:text-yellow-500 font-medium text-sm tracking-wide">RAGAM</a></li>
-                <li><a href="#indeks" class="text-white py-3 inline-block hover:text-yellow-500 font-medium text-sm tracking-wide">INDEKS</a></li>
+                <li><a href="{{ route('category.detail', 'polri') }}" class="text-white py-3 inline-block hover:text-yellow-500 font-medium text-sm tracking-wide">POLRI</a></li>
+                <li><a href="{{ route('category.detail', 'kriminal') }}" class="text-white py-3 inline-block hover:text-yellow-500 font-medium text-sm tracking-wide">KRIMINAL</a></li>
+                <li><a href="{{ route('category.detail', 'bhabin') }}" class="text-white py-3 inline-block hover:text-yellow-500 font-medium text-sm tracking-wide">BHABIN</a></li>
+                <li><a href="{{ route('category.detail', 'lantas') }}" class="text-white py-3 inline-block hover:text-yellow-500 font-medium text-sm tracking-wide">LANTAS</a></li>
+                <li><a href="{{ route('category.detail', 'politik') }}" class="text-white py-3 inline-block hover:text-yellow-500 font-medium text-sm tracking-wide">POLITIK</a></li>
+                <li><a href="{{ route('category.detail', 'ragam') }}" class="text-white py-3 inline-block hover:text-yellow-500 font-medium text-sm tracking-wide">RAGAM</a></li>
+                <li><a href="{{ route('category.detail', 'indeks') }}" class="text-white py-3 inline-block hover:text-yellow-500 font-medium text-sm tracking-wide">INDEKS</a></li>
             </ul>
         </div>
     </nav>

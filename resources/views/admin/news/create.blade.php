@@ -36,6 +36,31 @@
 
                         <div class="mb-4">
                             <x-input-label for="content" :value="__('Content')" />
+                            
+                            <!-- Shortcode Examples -->
+                            <div class="mb-4 p-4 bg-gray-50 rounded-lg border border-gray-200">
+                                <h4 class="text-sm font-semibold text-gray-700 mb-3">Contoh Shortcode yang bisa digunakan:</h4>
+                                <div class="space-y-3 text-sm">
+                                    <!-- Baca Juga Example -->
+                                    <div>
+                                        <label class="block text-xs font-medium text-gray-600 mb-1">Baca Juga (copy paste ke editor):</label>
+                                        <div class="bg-white border border-gray-300 rounded p-2 font-mono text-xs">
+                                            [baca_juga]Judul artikel terkait[/baca_juga]
+                                        </div>
+                                        <p class="text-xs text-gray-500 mt-1">Contoh: [baca_juga url=/news/slug]Polisi Tangkap Pencuri Motor di Jakarta[/baca_juga]</p>
+                                    </div>
+                                    
+                                    <!-- Quote Example -->
+                                    <div>
+                                        <label class="block text-xs font-medium text-gray-600 mb-1">Quote (copy paste ke editor):</label>
+                                        <div class="bg-white border border-gray-300 rounded p-2 font-mono text-xs">
+                                            [quote]Teks kutipan\n- Nama sumber[/quote]
+                                        </div>
+                                        <p class="text-xs text-gray-500 mt-1">Contoh: [quote]Kami akan menangani kasus ini dengan serius\n- Kapolda Jakarta[/quote]</p>
+                                    </div>
+                                </div>
+                            </div>
+                            
                             <!-- Hidden textarea for form submission -->
                             <textarea id="content" name="content" style="display: none">{{ old('content') }}</textarea>
                             <!-- Quill editor container -->
@@ -129,6 +154,39 @@
                     ['link', 'image'],
                     ['clean']
                 ]
+            }
+        });
+
+        // Override Enter key behavior in blockquote - use Shift+Enter for line breaks
+        quill.keyboard.addBinding({
+            key: 'Enter',
+            shiftKey: true,
+            collapsed: true,
+            format: ['blockquote'],
+            handler: function(range, context) {
+                // Insert line break (<br>) within the same blockquote
+                this.quill.insertText(range.index, '\n', Quill.sources.USER);
+                this.quill.setSelection(range.index + 1, Quill.sources.SILENT);
+                return false; // Prevent default behavior
+            }
+        });
+
+        // Override regular Enter key in blockquote to exit blockquote
+        quill.keyboard.addBinding({
+            key: 'Enter',
+            collapsed: true,
+            format: ['blockquote'],
+            handler: function(range, context) {
+                // Exit blockquote by inserting new paragraph after it
+                var [block] = this.quill.getLine(range.index);
+                if (block && block.domNode && block.domNode.tagName === 'BLOCKQUOTE') {
+                    // Insert new line after blockquote
+                    this.quill.insertText(range.index, '\n', Quill.sources.USER);
+                    this.quill.formatLine(range.index + 1, 1, 'blockquote', false);
+                    this.quill.setSelection(range.index + 1, Quill.sources.SILENT);
+                    return false;
+                }
+                return true; // Allow default behavior for other cases
             }
         });
 
