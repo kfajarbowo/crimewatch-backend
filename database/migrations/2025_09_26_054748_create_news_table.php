@@ -21,7 +21,7 @@ return new class extends Migration
             $table->string('author')->nullable();
             $table->string('location')->nullable();
             $table->timestamp('published_at')->nullable();
-            $table->enum('status', ['draft', 'published', 'archived'])->default('draft');
+            $table->enum('status', ['draft', 'published', 'scheduled', 'archived'])->default('draft');
             $table->boolean('is_featured')->default(false);
             $table->integer('views')->default(0);
             $table->foreignId('category_id')->constrained()->onDelete('cascade');

@@ -13,12 +13,12 @@ class CategoryController extends Controller
     {
         $categories = Category::latest()
                             ->paginate(10); // Show 10 categories per page
-        return view('admin.categories.index', compact('categories'));
+        return view('backend.admin.categories.index', compact('categories'));
     }
 
     public function create()
     {
-        return view('admin.categories.create');
+        return view('backend.admin.categories.create');
     }
 
     public function store(Request $request)
@@ -39,7 +39,7 @@ class CategoryController extends Controller
 
     public function edit(Category $category)
     {
-        return view('admin.categories.edit', compact('category'));
+        return view('backend.admin.categories.edit', compact('category'));
     }
 
     public function update(Request $request, Category $category)

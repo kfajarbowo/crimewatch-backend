@@ -2,6 +2,26 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Force include red colors that might not be detected */
+.bg-red-50 { background-color: #fef2f2 !important; }
+.bg-red-100 { background-color: #fee2e2 !important; }
+.bg-red-600 { background-color: #dc2626 !important; }
+.bg-red-700 { background-color: #b91c1c !important; }
+.bg-red-800 { background-color: #991b1b !important; }
+.text-red-600 { color: #dc2626 !important; }
+.text-red-700 { color: #b91c1c !important; }
+.text-red-800 { color: #991b1b !important; }
+.text-red-900 { color: #7f1d1d !important; }
+.border-red-200 { border-color: #fecaca !important; }
+.border-red-500 { border-color: #ef4444 !important; }
+.border-red-800 { border-color: #991b1b !important; }
+.hover\:bg-red-100:hover { background-color: #fee2e2 !important; }
+.hover\:bg-red-700:hover { background-color: #b91c1c !important; }
+.hover\:bg-red-800:hover { background-color: #991b1b !important; }
+.hover\:text-red-600:hover { color: #dc2626 !important; }
+.hover\:text-red-800:hover { color: #991b1b !important; }
+.hover\:text-red-900:hover { color: #7f1d1d !important; }
+
 /* Custom styling untuk blockquote dengan garis merah vertikal */
 .prose blockquote {
     border-left: 4px solid #ef4444; /* Garis merah vertikal */

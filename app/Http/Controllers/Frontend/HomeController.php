@@ -88,28 +88,28 @@ class HomeController extends Controller
                             ->get();
 
         $kriminalNews = News::whereHas('category', function($q) {
-            $q->where('slug', 'polri');
+            $q->where('slug', 'kriminal');
         })->where('status', 'published')
                             ->latest()
                             ->take(3)
                             ->get();
 
         $bhabinNews = News::whereHas('category', function($q) {
-            $q->where('slug', 'kriminal');
-        })->where('status', 'published')
-                            ->latest()
-                            ->take(5)
-                            ->get();
-
-        $lantasNews = News::whereHas('category', function($q) {
             $q->where('slug', 'bhabin');
         })->where('status', 'published')
                             ->latest()
                             ->take(5)
                             ->get();
 
-        $politikNews = News::whereHas('category', function($q) {
+        $lantasNews = News::whereHas('category', function($q) {
             $q->where('slug', 'lantas');
+        })->where('status', 'published')
+                            ->latest()
+                            ->take(5)
+                            ->get();
+
+        $politikNews = News::whereHas('category', function($q) {
+            $q->where('slug', 'politik');
         })->where('status', 'published')
                             ->latest()
                             ->take(5)

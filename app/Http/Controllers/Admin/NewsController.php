@@ -16,19 +16,19 @@ class NewsController extends Controller
         $news = News::with('category')
                    ->latest()
                    ->paginate(10); // Show 10 news per page
-        return view('admin.news.index', compact('news'));
+        return view('backend.admin.news.index', compact('news'));
     }
 
     public function show(News $news)
     {
         $news->load('category');
-        return view('admin.news.show', compact('news'));
+        return view('backend.admin.news.show', compact('news'));
     }
 
     public function create()
     {
         $categories = Category::all();
-        return view('admin.news.create', compact('categories'));
+        return view('backend.admin.news.create', compact('categories'));
     }
 
     public function store(Request $request)
@@ -62,7 +62,7 @@ class NewsController extends Controller
     public function edit(News $news)
     {
         $categories = Category::all();
-        return view('admin.news.edit', compact('news', 'categories'));
+        return view('backend.admin.news.edit', compact('news', 'categories'));
     }
 
     public function update(Request $request, News $news)

@@ -15,13 +15,13 @@ class VideoController extends Controller
         $videos = Video::with('category')
                       ->latest()
                       ->paginate(2); // Show 2 videos per page
-        return view('admin.videos.index', compact('videos'));
+        return view('backend.admin.videos.index', compact('videos'));
     }
 
     public function create()
     {
         $categories = Category::all();
-        return view('admin.videos.create', compact('categories'));
+        return view('backend.admin.videos.create', compact('categories'));
     }
 
     public function store(Request $request)
@@ -55,7 +55,7 @@ class VideoController extends Controller
     public function edit(Video $video)
     {
         $categories = Category::all();
-        return view('admin.videos.edit', compact('video', 'categories'));
+        return view('backend.admin.videos.edit', compact('video', 'categories'));
     }
 
     public function update(Request $request, Video $video)
