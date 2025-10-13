@@ -14,7 +14,7 @@
                 <div class="p-6 bg-white border-b border-gray-200">
                     <form id="newsForm" action="{{ route('admin.news.store') }}" method="POST" enctype="multipart/form-data">
                         @csrf
-                        
+
                         <div class="mb-4">
                             <x-input-label for="category_id" :value="__('Category')" />
                             <select name="category_id" id="category_id" class="border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm block mt-1 w-full">
@@ -36,32 +36,31 @@
 
                         <div class="mb-4">
                             <x-input-label for="content" :value="__('Content')" />
-                            
-                            <!-- Shortcode Examples -->
+
+
                             <div class="mb-4 p-4 bg-gray-50 rounded-lg border border-gray-200">
                                 <h4 class="text-sm font-semibold text-gray-700 mb-3">Contoh Shortcode yang bisa digunakan:</h4>
                                 <div class="space-y-3 text-sm">
-                                    <!-- Baca Juga Example -->
+
                                     <div>
                                         <label class="block text-xs font-medium text-gray-600 mb-1">Baca Juga (copy paste ke editor):</label>
                                         <div class="bg-white border border-gray-300 rounded p-2 font-mono text-xs">
-                                            [baca_juga]Judul artikel terkait[/baca_juga]
+                                        [baca-juga url="/news/tester"]patrick menikahi tiang dan hidup bahagia selamanya[/baca-juga]
                                         </div>
-                                        <p class="text-xs text-gray-500 mt-1">Contoh: [baca_juga url=/news/slug]Polisi Tangkap Pencuri Motor di Jakarta[/baca_juga]</p>
+                                        <p class="text-xs text-gray-500 mt-1">Contoh: [baca-juga url="/news/tester"]patrick menikahi tiang dan hidup bahagia selamanya[/baca-juga]</p>
                                     </div>
-                                    
-                                    <!-- Quote Example -->
+
+
                                     <div>
                                         <label class="block text-xs font-medium text-gray-600 mb-1">Quote (copy paste ke editor):</label>
                                         <div class="bg-white border border-gray-300 rounded p-2 font-mono text-xs">
-                                            [quote]Teks kutipan\n- Nama sumber[/quote]
+                                        [quote author="Jojo"]Tincur massa id et id tellus.\nConvallis .[/quote]
                                         </div>
-                                        <p class="text-xs text-gray-500 mt-1">Contoh: [quote]Kami akan menangani kasus ini dengan serius\n- Kapolda Jakarta[/quote]</p>
+                                        <p class="text-xs text-gray-500 mt-1">Contoh: [quote author="Jojo"]Tincur massa id et id tellus.\nConvallis .[/quote]</p>
                                     </div>
                                 </div>
                             </div>
-                            
-                            <!-- Hidden textarea for form submission -->
+
                             <textarea id="content" name="content" style="display: none">{{ old('content') }}</textarea>
                             <!-- Quill editor container -->
                             <div id="editor" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm h-96">
@@ -102,12 +101,12 @@
                                 <option value="archived" {{ old('status') == 'archived' ? 'selected' : '' }}>Archived</option>
                             </select>
                             <x-input-error :messages="$errors->get('status')" class="mt-2" />
-                            
+
                         </div>
 
                         <div class="mb-4">
                             <label class="inline-flex items-center">
-                                <input type="checkbox" name="is_featured" value="1" {{ old('is_featured') ? 'checked' : '' }} 
+                                <input type="checkbox" name="is_featured" value="1" {{ old('is_featured') ? 'checked' : '' }}
                                     class="rounded border-gray-300 text-indigo-600 shadow-sm focus:ring-indigo-500">
                                 <span class="ml-2 text-sm text-gray-600">Featured News (Tampilkan di slider utama)</span>
                             </label>
@@ -157,27 +156,25 @@
             }
         });
 
-        // Override Enter key behavior in blockquote - use Shift+Enter for line breaks
         quill.keyboard.addBinding({
             key: 'Enter',
             shiftKey: true,
             collapsed: true,
             format: ['blockquote'],
             handler: function(range, context) {
-                // Insert line break (<br>) within the same blockquote
+
                 this.quill.insertText(range.index, '\n', Quill.sources.USER);
                 this.quill.setSelection(range.index + 1, Quill.sources.SILENT);
-                return false; // Prevent default behavior
+                return false;
             }
         });
 
-        // Override regular Enter key in blockquote to exit blockquote
         quill.keyboard.addBinding({
             key: 'Enter',
             collapsed: true,
             format: ['blockquote'],
             handler: function(range, context) {
-                // Exit blockquote by inserting new paragraph after it
+
                 var [block] = this.quill.getLine(range.index);
                 if (block && block.domNode && block.domNode.tagName === 'BLOCKQUOTE') {
                     // Insert new line after blockquote
@@ -186,17 +183,15 @@
                     this.quill.setSelection(range.index + 1, Quill.sources.SILENT);
                     return false;
                 }
-                return true; // Allow default behavior for other cases
+                return true;
             }
         });
 
         // Function to submit form
         function submitForm() {
-            // Get Quill contents
             var content = document.querySelector('#content');
             content.value = quill.root.innerHTML;
 
-            // Submit form
             document.getElementById('newsForm').submit();
         }
     </script>
