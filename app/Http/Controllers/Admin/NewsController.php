@@ -41,7 +41,7 @@ class NewsController extends Controller
             'author' => 'required|string|max:255',
             'location' => 'nullable|string|max:255',
             'published_at' => 'nullable|date',
-            'status' => 'required|in:draft,published,archived',
+            'status' => 'required|in:draft,published,scheduled,archived',
             'tags' => 'nullable|string',
             'is_featured' => 'nullable|boolean'
         ]);
@@ -75,7 +75,7 @@ class NewsController extends Controller
             'author' => 'required|string|max:255',
             'location' => 'nullable|string|max:255',
             'published_at' => 'nullable|date',
-            'status' => 'required|in:draft,published,archived',
+            'status' => 'required|in:draft,published,scheduled,archived',
             'tags' => 'nullable|string',
             'is_featured' => 'nullable|boolean'
         ]);
@@ -103,7 +103,7 @@ class NewsController extends Controller
         if ($news->image) {
             Storage::disk('public')->delete($news->image);
         }
-        
+
         $news->delete();
 
         return redirect()->route('admin.news.index')
