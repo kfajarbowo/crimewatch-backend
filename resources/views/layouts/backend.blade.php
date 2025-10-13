@@ -6,7 +6,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CrimeWatch</title>
+    <title>CrimeWatch - Admin</title>
     @vite(['resources/css/app.css'])
     
     <!-- Red Colors CSS -->
@@ -181,11 +181,11 @@
     </style>
 </head>
 <body class="bg-gray-50">
-    @include('frontend.layouts.header')
+    @include('backend.partials.header')
     
     @yield('content')
     
-    @include('frontend.layouts.footer')
+    @include('backend.partials.footer')
 
     <script async src="https://www.tiktok.com/embed.js"></script>
     @stack('scripts')
