@@ -42,7 +42,7 @@ class News extends Model
         return $this->image ? asset('storage/' . $this->image) : asset('images/placeholder.jpg');
     }
 
-    
+
     public function getRenderedContentAttribute(): string
     {
         $html = (string) $this->content;
@@ -64,17 +64,17 @@ class News extends Model
         $html = preg_replace_callback($quotePattern, function ($matches) {
             $author = isset($matches[1]) ? e(trim($matches[1])) : '';
             $quote = e(trim($matches[2]));
-            
-            // Split quote into lines if it contains \n
-            $lines = explode('\n', $quote);
+
+            // Split quote into lines if it contains actual newlines
+            $lines = preg_split('/\r\n|\r|\n/', $quote);
             $quoteHtml = '';
-            
+
             foreach ($lines as $line) {
                 if (!empty(trim($line))) {
                     $quoteHtml .= '<p>' . trim($line) . '</p>';
                 }
             }
-            
+
             // Add author if provided
             if (!empty($author)) {
                 $quoteHtml .= '<p>- ' . $author . '</p>';
