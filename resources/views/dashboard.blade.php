@@ -1,4 +1,4 @@
-@extends('frontend.layouts.app')
+@extends('layouts.backend')
 
 @section('content')
 <main class="container mx-auto px-3 sm:px-4 lg:px-6 py-4 sm:py-6">
@@ -16,6 +16,7 @@
                 <div>
                     <h3 class="text-sm sm:text-base font-medium text-gray-500 uppercase tracking-wide">Categories</h3>
                     <p class="text-2xl sm:text-3xl font-bold text-red-600 mt-2">{{ App\Models\Category::count() }}</p>
+                    <p class="text-xs text-gray-500 mt-1">Active Categories</p>
                 </div>
                 <div class="bg-red-100 p-3 rounded-full">
                     <svg class="w-6 h-6 text-red-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -37,6 +38,7 @@
                 <div>
                     <h3 class="text-sm sm:text-base font-medium text-gray-500 uppercase tracking-wide">News</h3>
                     <p class="text-2xl sm:text-3xl font-bold text-red-600 mt-2">{{ App\Models\News::count() }}</p>
+                    <p class="text-xs text-gray-500 mt-1">{{ App\Models\News::where('status', 'published')->count() }} Published</p>
                 </div>
                 <div class="bg-red-100 p-3 rounded-full">
                     <svg class="w-6 h-6 text-red-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -58,6 +60,7 @@
                 <div>
                     <h3 class="text-sm sm:text-base font-medium text-gray-500 uppercase tracking-wide">Videos</h3>
                     <p class="text-2xl sm:text-3xl font-bold text-red-600 mt-2">{{ App\Models\Video::count() }}</p>
+                    <p class="text-xs text-gray-500 mt-1">TikTok Videos</p>
                 </div>
                 <div class="bg-red-100 p-3 rounded-full">
                     <svg class="w-6 h-6 text-red-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
