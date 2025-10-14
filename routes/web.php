@@ -28,6 +28,11 @@ Route::middleware('auth')->group(function () {
         Route::resource('categories', CategoryController::class);
         Route::resource('news', NewsController::class);
         Route::resource('videos', VideoController::class);
+        
+        // Manual publish scheduled news
+        Route::post('news/publish-scheduled', [NewsController::class, 'publishScheduled'])->name('news.publish-scheduled');
+        // Test scheduler functionality
+        Route::post('news/test-scheduler', [NewsController::class, 'testScheduler'])->name('news.test-scheduler');
     });
 
     Route::post('logout', [AuthenticatedSessionController::class, 'destroy'])->name('logout');

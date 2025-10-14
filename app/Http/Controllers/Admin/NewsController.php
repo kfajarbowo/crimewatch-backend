@@ -109,4 +109,76 @@ class NewsController extends Controller
         return redirect()->route('admin.news.index')
             ->with('success', 'News deleted successfully.');
     }
+
+    public function publishScheduled()
+    {
+        $now = now();
+        
+        // Find all scheduled news that should be published now or earlier
+        $scheduledNews = News::where('status', 'scheduled')
+            ->whereNotNull('published_at')
+            ->where('published_at', '<=', $now)
+            ->get();
+        
+        if ($scheduledNews->isEmpty()) {
+            return redirect()->route('admin.news.index')
+                ->with('info', 'No scheduled news ready for publishing at this time.');
+        }
+
+        $publishedCount = 0;
+        foreach ($scheduledNews as $news) {
+            $news->update(['status' => 'published']);
+            $publishedCount++;
+        }
+
+        return redirect()->route('admin.news.index')
+            ->with('success', "Published {$publishedCount} scheduled news articles that were ready for publishing.");
+    }
+
+    public function testScheduler()
+    {
+      
+        $now = now();
+        
+      
+        $allScheduled = News::where('status', 'scheduled')->get();
+        
+        
+        $readyToPublish = News::where('status', 'scheduled')
+            ->whereNotNull('published_at')
+            ->where('published_at', '<=', $now)
+            ->get();
+        
+        $message = "=== SCHEDULER TEST ===\n";
+        $message .= "Current time: " . $now . "\n";
+        $message .= "Total scheduled news: " . $allScheduled->count() . "\n";
+        $message .= "Ready to publish: " . $readyToPublish->count() . "\n\n";
+        
+        if ($allScheduled->count() > 0) {
+            $message .= "Scheduled Articles:\n";
+            foreach ($allScheduled as $news) {
+                $publishedAt = $news->published_at ? $news->published_at->format('Y-m-d H:i:s') : 'NULL';
+                $isReady = $news->published_at && $news->published_at <= $now ? 'YES' : 'NO';
+                $message .= "- {$news->title}\n";
+                $message .= "  Published At: {$publishedAt}\n";
+                $message .= "  Ready: {$isReady}\n\n";
+            }
+        }
+        
+
+        if ($readyToPublish->count() > 0) {
+            $publishedCount = 0;
+            foreach ($readyToPublish as $news) {
+                $news->update(['status' => 'published']);
+                $publishedCount++;
+            }
+            $message .= "Published {$publishedCount} articles automatically!";
+        } else {
+            $message .= "No articles ready for publishing at this time.";
+        }
+        
+        return redirect()->route('admin.news.index')
+            ->with('info', $message);
+    }
+
 }
