@@ -29,7 +29,7 @@
                         </div>
                         <div class="flex items-center justify-between flex-wrap gap-4">
                             <div class="flex flex-col text-sm text-gray-500 space-y-1">
-                                <span>{{ $news->created_at?->translatedFormat('l, d F Y - H:i') }} WIB</span>
+                                <span>{{ $news->created_at?->locale('id')->translatedFormat('l, d F Y - H:i') }} WIB</span>
                                 @if(!empty($news->author))
                                 <span class="text-red-600">{{ $news->author }}</span>
                                 @endif
