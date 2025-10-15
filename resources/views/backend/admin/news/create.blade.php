@@ -81,12 +81,6 @@
                         <x-input-error :messages="$errors->get('location')" class="mt-2" />
                     </div>
 
-                    <div id="publish-date-container" class="mb-4 hidden">
-                        <x-input-label for="published_at" :value="__('Publish Date')" />
-                        <x-text-input id="published_at" name="published_at" type="datetime-local" class="block mt-1 w-full" :value="old('published_at')" />
-                        <x-input-error :messages="$errors->get('published_at')" class="mt-2" />
-                    </div>
-
                     <div class="mb-4">
                         <x-input-label for="status" :value="__('Status')" />
                         <select name="status" id="status" class="border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm block mt-1 w-full">
@@ -98,10 +92,16 @@
                         <x-input-error :messages="$errors->get('status')" class="mt-2" />
                     </div>
 
+                    <div id="publish-date-container" class="mb-4 hidden">
+                        <x-input-label for="published_at" :value="__('Publish Date')" />
+                        <x-text-input id="published_at" name="published_at" type="datetime-local" class="block mt-1 w-full" :value="old('published_at')" />
+                        <x-input-error :messages="$errors->get('published_at')" class="mt-2" />
+                    </div>
+
                     <div class="mb-4">
                         <label class="inline-flex items-center">
-                            <input type="checkbox" name="is_featured" value="1" {{ old('is_featured') ? 'checked' : '' }}
-                        <span class="ml-2 text-sm text-gray-600">Featured News (Tampilkan di slider utama)</span>
+                            <input type="checkbox" name="is_featured" value="1" {{ old('is_featured') ? 'checked' : '' }}>
+                            <span class="ml-2 text-sm text-gray-600">Featured News (Tampilkan di slider utama)</span>
                         </label>
                         <x-input-error :messages="$errors->get('is_featured')" class="mt-2" />
                     </div>
@@ -157,11 +157,15 @@
         function togglePublishDate() {
             var status = document.getElementById('status').value;
             var publishDateContainer = document.getElementById('publish-date-container');
+            var publishDateInput = document.getElementById('published_at');
 
-            if (status === 'published' || status === 'scheduled') {
+            if (status === 'scheduled') {
                 publishDateContainer.classList.remove('hidden');
+                publishDateInput.setAttribute('required', 'required');
             } else {
                 publishDateContainer.classList.add('hidden');
+                publishDateInput.removeAttribute('required');
+                publishDateInput.value = '';
             }
         }
 

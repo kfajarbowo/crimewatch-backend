@@ -17,7 +17,7 @@
                                         <div class="absolute bottom-0 left-0 right-0 p-3 sm:p-4 lg:p-6 bg-gradient-to-t from-black via-black/70 to-transparent text-white">
                                             <span class="inline-block text-red-400 font-medium text-xs sm:text-sm border-b-2 border-yellow-500 pb-1 mb-2 sm:mb-3">{{ $news->category->name }}</span>
                                             <h1 class="text-lg sm:text-xl lg:text-2xl font-bold mb-1 sm:mb-2 line-clamp-2">{{ $news->title }}</h1>
-                                            <p class="text-xs sm:text-sm text-gray-200">{{ $news->created_at->format('l, d F Y') }}</p>
+                                            <p class="text-xs sm:text-sm text-gray-200">{{ $news->published_at->format('l, d F Y') }}</p>
                                         </div>
                                     </div>
                                 </a>
@@ -60,7 +60,7 @@
                                     <span class="text-[10px] sm:text-xs text-red-600 font-medium border-b-2 border-yellow-500 pb-1">{{ $news->category->name }}</span>
                                 </div>
                                 <h3 class="font-medium text-xs sm:text-sm mt-1 group-hover:text-red-600 transition-colors line-clamp-2">{{ $news->title }}</h3>
-                                <span class="text-[10px] sm:text-xs text-gray-500 line-clamp-1 mt-1">{{ $news->created_at->format('d F Y') }}</span>
+                                <span class="text-[10px] sm:text-xs text-gray-500 line-clamp-1 mt-1">{{ $news->published_at->format('d F Y') }}</span>
                             </div>
                         </a>
                     @endforeach
@@ -134,7 +134,7 @@
                                 <div class="flex-1 p-3 sm:p-4">
                                     <span class="inline-block text-xs sm:text-sm text-red-600 font-medium border-b-2 border-yellow-500 pb-1">{{ $news->category->name }}</span>
                                     <h3 class="font-bold text-sm sm:text-base lg:text-lg mt-1 mb-1 sm:mb-2 group-hover:text-red-600 transition-colors line-clamp-2">{{ $news->title }}</h3>
-                                    <p class="text-xs sm:text-sm text-gray-500">{{ $news->created_at->format('l, d F Y - H:i') }} WIB</p>
+                                    <p class="text-xs sm:text-sm text-gray-500">{{ $news->published_at->format('l, d F Y - H:i') }} WIB</p>
                                 </div>
                             </div>
                         </a>

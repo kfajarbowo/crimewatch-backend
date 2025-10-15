@@ -45,7 +45,7 @@
                         </div>
                         <div class="flex items-center justify-between flex-wrap gap-4">
                             <div class="flex flex-col text-sm text-gray-500 space-y-1">
-                                <span>{{ $news->created_at?->locale('id')->translatedFormat('l, d F Y - H:i') }} WIB</span>
+                                <span>{{ $news->published_at?->locale('id')->translatedFormat('l, d F Y - H:i') }} WIB</span>
                                 @if(!empty($news->author))
                                 <span class="text-red-600">{{ $news->author }}</span>
                                 @endif
@@ -109,7 +109,7 @@
                                     <span class="text-[10px] sm:text-xs text-red-600 font-medium border-b-2 border-yellow-500 pb-1">{{ $pop->category->name }}</span>
                                 </div>
                                 <h3 class="font-medium text-xs sm:text-sm mt-1 group-hover:text-red-600 transition-colors line-clamp-2 leading-snug">{{ $pop->title }}</h3>
-                                <span class="text-[10px] sm:text-xs text-gray-500 line-clamp-1 mt-1">{{ $pop->created_at->locale('id')->translatedFormat('d F Y') }}</span>
+                                <span class="text-[10px] sm:text-xs text-gray-500 line-clamp-1 mt-1">{{ $pop->published_at->locale('id')->translatedFormat('d F Y') }}</span>
                             </div>
                         </a>
                         @endforeach
@@ -129,7 +129,7 @@
                         </div>
                         <h2 class="inline-block text-red-600 font-bold border-b-2 border-yellow-500 pb-1">{{ $related->category->name }}</h2>
                         <h3 class="font-bold text-lg mb-2 group-hover:text-red-600 transition-colors line-clamp-2">{{ $related->title }}</h3>
-                        <p class="text-sm text-gray-500">{{ $related->created_at->locale('id')->translatedFormat('l, d F Y - H:i') }} WIB</p>
+                        <p class="text-sm text-gray-500">{{ $related->published_at->locale('id')->translatedFormat('l, d F Y - H:i') }} WIB</p>
                     </a>
                     @endforeach
                 </div>
