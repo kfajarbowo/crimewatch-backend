@@ -93,7 +93,7 @@
                                     <svg class="w-3 h-3 sm:w-4 sm:h-4 text-white" fill="currentColor" viewBox="0 0 24 24">
                                         <path d="M8 5v14l11-7z"/>
                                     </svg>
-                                    <span class="text-white text-xs ml-1">{{ $video->views }}</span>
+                                    <!-- <span class="text-white text-xs ml-1">{{ $video->views }}</span> -->
                                 </div>
                             </div>
                         </div>
