@@ -129,7 +129,7 @@
                         </div>
                         <h2 class="inline-block text-red-600 font-bold border-b-2 border-yellow-500 pb-1">{{ $related->category->name }}</h2>
                         <h3 class="font-bold text-lg mb-2 group-hover:text-red-600 transition-colors line-clamp-2">{{ $related->title }}</h3>
-                        <p class="text-sm text-gray-500">{{ $related->published_at->locale('id')->translatedFormat('l, d F Y - H:i') }} WIB</p>
+                        <p class="text-sm text-gray-500">{{ $related->published_at?->locale('id')?->translatedFormat('l, d F Y - H:i') }} WIB</p>
                     </a>
                     @endforeach
                 </div>

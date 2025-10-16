@@ -87,7 +87,7 @@
                         <x-input-error :messages="$errors->get('location')" class="mt-2" />
                     </div>
 
-                    <div id="publish-date-container" class="mb-4 {{ in_array(old('status', $news->status), ['published', 'scheduled']) ? '' : 'hidden' }}">
+                    <div id="publish-date-container" class="mb-4 {{ in_array(old('status', $news->status), ['scheduled']) ? '' : 'hidden' }}">
                         <x-input-label for="published_at" :value="__('Publish Date')" />
                         <x-text-input id="published_at" name="published_at" type="datetime-local" class="block mt-1 w-full" :value="old('published_at', $news->published_at ? $news->published_at->format('Y-m-d\TH:i') : '')" />
                         <x-input-error :messages="$errors->get('published_at')" class="mt-2" />
@@ -106,8 +106,8 @@
 
                     <div class="mb-4">
                         <label class="inline-flex items-center">
-                            <input type="checkbox" name="is_featured" value="1" {{ old('is_featured', $news->is_featured) ? 'checked' : '' }}
-                        <span class="ml-2 text-sm text-gray-600">Featured News (Tampilkan di slider utama)</span>
+                            <input type="checkbox" name="is_featured" value="1" {{ old('is_featured', $news->is_featured) ? 'checked' : '' }}>
+                            <span class="ml-2 text-sm text-gray-600">Featured News (Tampilkan di slider utama)</span>
                         </label>
                         <x-input-error :messages="$errors->get('is_featured')" class="mt-2" />
                     </div>
@@ -160,11 +160,15 @@
         function togglePublishDate() {
             var status = document.getElementById('status').value;
             var publishDateContainer = document.getElementById('publish-date-container');
+            var publishDateInput = document.getElementById('published_at');
 
-            if (status === 'published' || status === 'scheduled') {
+            if (status === 'scheduled') {
                 publishDateContainer.classList.remove('hidden');
+                publishDateInput.setAttribute('required', 'required');
             } else {
                 publishDateContainer.classList.add('hidden');
+                publishDateInput.removeAttribute('required');
+                publishDateInput.value = '';
             }
         }
 

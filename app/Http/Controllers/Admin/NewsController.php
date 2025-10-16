@@ -40,7 +40,7 @@ class NewsController extends Controller
             'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
             'author' => 'required|string|max:255',
             'location' => 'nullable|string|max:255',
-            'published_at' => 'nullable|date',
+            'published_at' => 'nullable|date|required_if:status,scheduled',
             'status' => 'required|in:draft,published,scheduled,archived',
             'tags' => 'nullable|string',
             'is_featured' => 'nullable|boolean'
@@ -51,6 +51,11 @@ class NewsController extends Controller
 
         if ($request->hasFile('image')) {
             $data['image'] = $request->file('image')->store('news', 'public');
+        }
+
+       
+        if (($data['status'] ?? null) === 'published' && empty($data['published_at'])) {
+            $data['published_at'] = now();
         }
 
         $news = News::create($data);
@@ -74,7 +79,7 @@ class NewsController extends Controller
             'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
             'author' => 'required|string|max:255',
             'location' => 'nullable|string|max:255',
-            'published_at' => 'nullable|date',
+            'published_at' => 'nullable|date|required_if:status,scheduled',
             'status' => 'required|in:draft,published,scheduled,archived',
             'tags' => 'nullable|string',
             'is_featured' => 'nullable|boolean'
@@ -89,6 +94,10 @@ class NewsController extends Controller
                 Storage::disk('public')->delete($news->image);
             }
             $data['image'] = $request->file('image')->store('news', 'public');
+        }
+
+        if (($data['status'] ?? null) === 'published' && empty($data['published_at'])) {
+            $data['published_at'] = now();
         }
 
         $news->update($data);
