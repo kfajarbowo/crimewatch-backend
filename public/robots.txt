@@ -1,2 +1,7 @@
 User-agent: *
 Disallow:
+
+Sitemap: https://crimewatch.id/sitemap.xml
+Sitemap: https://crimewatch.id/sitemap-news.xml
+Sitemap: https://crimewatch.id/sitemap-categories.xml
+Sitemap: https://crimewatch.id/sitemap-index.xml

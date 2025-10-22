@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Support\Str;
 
 class News extends Model
 {
@@ -43,48 +44,55 @@ class News extends Model
     }
 
 
-    public function getRenderedContentAttribute(): string
+    public function getMetaDescriptionAttribute(): string
     {
-        $html = (string) $this->content;
+        return Str::limit(strip_tags($this->content), 160);
+    }
 
-        // Handle "Baca Juga" shortcode
-        $pattern = '/\[(baca[_-]juga)\s+url=\"([^\"]+)\"\](.*?)\[\/\1\]/is';
-        $html = preg_replace_callback($pattern, function ($matches) {
-            $url = e($matches[2]);
-            $text = e(trim($matches[3]));
+    public function getMetaKeywordsAttribute(): string
+    {
+        $keywords = [];
+        
+        // Add tags if available
+        if ($this->tags) {
+            $keywords[] = $this->tags;
+        }
+        
+        // Add category name
+        if ($this->category) {
+            $keywords[] = $this->category->name;
+        }
+        
+        // Add location if available
+        if ($this->location) {
+            $keywords[] = $this->location;
+        }
+        
+        // Add default keywords
+        $keywords[] = 'berita kriminal';
+        $keywords[] = 'kejahatan';
+        
+        return implode(', ', array_unique($keywords));
+    }
 
-            return '<div class="my-4 p-4 rounded border border-red-200 bg-red-50">
-                        <div class="text-red-700 font-semibold mb-1">Baca Juga:</div>
-                        <a href="' . $url . '" class="text-gray-700 hover:text-red-700 underline">' . $text . '</a>
-                    </div>';
-        }, $html);
+    public function getRelatedNewsAttribute()
+    {
+        return News::where('category_id', $this->category_id)
+            ->where('id', '!=', $this->id)
+            ->where('status', 'published')
+            ->latest()
+            ->take(6)
+            ->get();
+    }
 
-        // Handle "Quote" shortcode
-        $quotePattern = '/\[quote(?:\s+author=\"([^\"]+)\")?\]\s*(.*?)\s*\[\/quote\]/is';
-        $html = preg_replace_callback($quotePattern, function ($matches) {
-            $author = isset($matches[1]) ? e(trim($matches[1])) : '';
-            $quote = e(trim($matches[2]));
+    public function getWordCountAttribute(): int
+    {
+        return str_word_count(strip_tags($this->content));
+    }
 
-            // Split quote into lines if it contains actual newlines
-            $lines = preg_split('/\r\n|\r|\n/', $quote);
-            $quoteHtml = '';
-
-            foreach ($lines as $line) {
-                if (!empty(trim($line))) {
-                    $quoteHtml .= '<p>' . trim($line) . '</p>';
-                }
-            }
-
-            // Add author if provided
-            if (!empty($author)) {
-                $quoteHtml .= '<p>- ' . $author . '</p>';
-            }
-
-            return '<blockquote class="border-l-4 border-red-500 pl-6 my-4 italic text-gray-700">
-                        ' . $quoteHtml . '
-                    </blockquote>';
-        }, $html);
-
-        return $html;
+    public function getInternalLinksAttribute()
+    {
+        
+        return [];
     }
 }

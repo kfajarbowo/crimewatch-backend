@@ -17,13 +17,8 @@ class HomeController extends Controller
         // Increment views
         $news->increment('views');
 
-        // Get related news (only published)
-        $relatedNews = News::where('category_id', $news->category_id)
-            ->where('id', '!=', $news->id)
-            ->where('status', 'published')
-            ->latest()
-            ->take(6)
-            ->get();
+        // Get related news using optimized method
+        $relatedNews = $news->related_news;
 
         // Get popular news (only published)
         $popularNews = News::where('status', 'published')
