@@ -1,5 +1,5 @@
 User-agent: *
-Disallow:
+Allow: /
 
 Sitemap: https://crimewatch.id/sitemap.xml
 Sitemap: https://crimewatch.id/sitemap-news.xml
