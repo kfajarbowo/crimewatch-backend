@@ -1,5 +1,14 @@
 @extends('frontend.layouts.app')
 
+@section('page-title', 'Berita ' . ucfirst($category->name) . ' - CrimeWatch.ID')
+@section('meta-description', $category->description ?: 'Baca berita terkini tentang ' . $category->name . ' di CrimeWatch.ID. Portal berita kriminal terpercaya dengan informasi terbaru tentang penegakan hukum dan keamanan masyarakat.')
+@section('meta-keywords', 'berita ' . $category->name . ', ' . $category->name . ', kriminal, kejahatan, polisi, hukum, keamanan')
+@section('canonical-url', route('category.detail', $category->slug))
+
+@section('og-title', 'Berita ' . ucfirst($category->name) . ' - CrimeWatch.ID')
+@section('og-description', $category->description ?: 'Baca berita terkini tentang ' . $category->name . ' di CrimeWatch.ID. Portal berita kriminal terpercaya.')
+@section('og-type', 'website')
+
 @section('content')
 <main class="container mx-auto px-3 sm:px-4 lg:px-6 py-4 sm:py-6">
     <!-- Breadcrumb -->
@@ -26,7 +35,7 @@
                 <article class="bg-white rounded-lg overflow-hidden shadow-sm group hover:bg-gray-50 hover:shadow-md transition-all">
                     <a href="{{ route('news.detail', $article->slug) }}" class="block">
                         <div class="bg-gray-300 aspect-video">
-                            <img src="{{ $article->image_url }}" alt="{{ $article->title }}" class="w-full h-full object-cover">
+                            <img src="{{ $article->image_url }}" alt="{{ $article->title }}" class="w-full h-full object-cover" loading="lazy">
                         </div>
                         <div class="p-4">
                             <span class="inline-block text-red-600 font-medium text-xs border-b-2 border-yellow-500 pb-1">{{ strtoupper($category->name) }}</span>
@@ -54,7 +63,7 @@
                     @foreach($popularNews as $popular)
                     <a href="{{ route('news.detail', $popular->slug) }}" class="flex items-start space-x-3 bg-white rounded-lg p-2.5 sm:p-3 shadow-sm group hover:bg-gray-50 hover:shadow-md transition-all">
                         <div class="w-16 h-12 sm:w-20 sm:h-14 lg:w-24 lg:h-16 bg-gray-200 rounded flex-shrink-0">
-                            <img src="{{ $popular->image_url }}" alt="{{ $popular->title }}" class="w-full h-full object-cover rounded">
+                            <img src="{{ $popular->image_url }}" alt="{{ $popular->title }}" class="w-full h-full object-cover rounded" loading="lazy">
                         </div>
                         <div class="flex-1 min-w-0">
                             <div class="inline-flex items-center space-x-2">

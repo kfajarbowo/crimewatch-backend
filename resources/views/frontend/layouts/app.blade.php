@@ -6,7 +6,27 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CrimeWatch</title>
+    
+    <!-- Dynamic SEO Meta Tags -->
+    <title>@yield('page-title', 'CrimeWatch.ID - Portal Berita Kriminal Terpercaya')</title>
+    <meta name="description" content="@yield('meta-description', 'CrimeWatch.ID adalah portal berita kriminal terpercaya yang menyajikan informasi terkini tentang kejahatan, penegakan hukum, dan keamanan masyarakat di Indonesia.')">
+    <meta name="keywords" content="@yield('meta-keywords', 'berita kriminal, kejahatan, polisi, hukum, keamanan, Indonesia')">
+    <meta name="author" content="@yield('meta-author', 'CrimeWatch.ID')">
+    <link rel="canonical" href="@yield('canonical-url', url()->current())">
+    
+    <!-- Open Graph Meta Tags -->
+    <meta property="og:title" content="@yield('og-title', 'CrimeWatch.ID - Portal Berita Kriminal Terpercaya')">
+    <meta property="og:description" content="@yield('og-description', 'CrimeWatch.ID adalah portal berita kriminal terpercaya yang menyajikan informasi terkini tentang kejahatan, penegakan hukum, dan keamanan masyarakat di Indonesia.')">
+    <meta property="og:image" content="@yield('og-image', asset('images/logo.png'))">
+    <meta property="og:url" content="@yield('og-url', url()->current())">
+    <meta property="og:type" content="@yield('og-type', 'website')">
+    <meta property="og:site_name" content="CrimeWatch.ID">
+    
+    <!-- Twitter Card Meta Tags -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="@yield('twitter-title', 'CrimeWatch.ID - Portal Berita Kriminal Terpercaya')">
+    <meta name="twitter:description" content="@yield('twitter-description', 'CrimeWatch.ID adalah portal berita kriminal terpercaya yang menyajikan informasi terkini tentang kejahatan, penegakan hukum, dan keamanan masyarakat di Indonesia.')">
+    <meta name="twitter:image" content="@yield('twitter-image', asset('images/logo.png'))">
     @vite(['resources/css/app.css'])
     
     <!-- Red Colors CSS -->

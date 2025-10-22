@@ -1,31 +1,38 @@
 @php use Illuminate\Support\Str; @endphp
-
 @extends('frontend.layouts.app')
 
-@section('meta')
-    <!-- Dynamic Meta Tags for Social Sharing -->
-    <meta property="og:title" content="{{ $news->title }}">
-    <meta property="og:description" content="{{ Str::limit(strip_tags($news->content), 200) }}">
-    <meta property="og:image" content="{{ $news->image_url }}">
-    <meta property="og:url" content="{{ url()->current() }}">
-    <meta property="og:type" content="article">
-    <meta property="og:site_name" content="CrimeWatch">
-    <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="{{ $news->title }}">
-    <meta name="twitter:description" content="{{ Str::limit(strip_tags($news->content), 200) }}">
-    <meta name="twitter:image" content="{{ $news->image_url }}">
-@endsection
+@section('page-title', $news->title . ' - CrimeWatch.ID')
+@section('meta-description', $news->meta_description)
+@section('meta-keywords', $news->meta_keywords)
+@section('meta-author', $news->author ?: 'CrimeWatch.ID')
+@section('canonical-url', route('news.detail', $news->slug))
+
+@section('og-title', $news->title)
+@section('og-description', $news->meta_description)
+@section('og-image', $news->image_url)
+@section('og-url', route('news.detail', $news->slug))
+@section('og-type', 'article')
+
+@section('twitter-title', $news->title)
+@section('twitter-description', $news->meta_description)
+@section('twitter-image', $news->image_url)
 
 @section('content')
     <main class="container mx-auto px-4 py-6">
-        <!-- Breadcrumb -->
-        <div class="flex items-center text-sm text-gray-500 mb-4 overflow-x-auto whitespace-nowrap">
-            <a href="/" class="hover:text-red-600">Home</a>
-            <span class="mx-2">/</span>
-            <a href="#" class="hover:text-red-600">{{ $news->category->name ?? 'Kategori' }}</a>
-            <span class="mx-2">/</span>
-            <span class="text-gray-700 line-clamp-1">{{ $news->title }}</span>
-        </div>
+        <!-- SEO-Friendly Breadcrumb -->
+        <nav aria-label="Breadcrumb" class="mb-4">
+            <ol class="flex items-center text-sm text-gray-500 overflow-x-auto whitespace-nowrap">
+                <li>
+                    <a href="/" class="hover:text-red-600 transition-colors">Home</a>
+                </li>
+                <li class="mx-2">/</li>
+                <li>
+                    <a href="{{ route('category.detail', $news->category->slug) }}" class="hover:text-red-600 transition-colors">{{ $news->category->name }}</a>
+                </li>
+                <li class="mx-2">/</li>
+                <li class="text-gray-700 line-clamp-1" aria-current="page">{{ $news->title }}</li>
+            </ol>
+    </nav>
 
         <div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
             <!-- Main Article Content -->
@@ -67,7 +74,7 @@
 
                     <!-- Featured Image -->
                     <div class="mb-6">
-                        <img src="{{ $news->image_url }}" alt="{{ $news->title }}" class="w-full rounded-lg">
+                        <img src="{{ $news->image_url }}" alt="{{ $news->title }}" class="w-full rounded-lg" loading="lazy">
                         @if(!empty($news->author))
                         <p class="text-sm text-gray-500 mt-2">{{ $news->title }}. (Foto: {{ $news->author }})</p>
                         @endif
@@ -77,6 +84,21 @@
                     <div class="prose max-w-none">
                             {!! $news->rendered_content !!}
                         </div>
+
+                    <!-- Internal Links -->
+                    @if($news->internal_links && count($news->internal_links) > 0)
+                    <div class="mt-8 pt-6 border-t">
+                        <h3 class="text-lg font-bold text-gray-800 mb-4">Artikel Terkait</h3>
+                        <div class="space-y-3">
+                            @foreach($news->internal_links as $link)
+                            <div class="p-4 bg-red-50 border border-red-200 rounded-lg">
+                                <div class="text-red-700 font-semibold mb-1">Baca Juga:</div>
+                                <a href="{{ $link['url'] }}" class="text-gray-700 hover:text-red-700 underline">{{ $link['text'] }}</a>
+                            </div>
+                            @endforeach
+                        </div>
+                    </div>
+                    @endif
 
                     <!-- Tags -->
                     @if($news->tags)
@@ -102,7 +124,7 @@
                         @foreach($popularNews as $pop)
                         <a href="{{ route('news.detail', $pop->slug) }}" class="flex items-start space-x-3 bg-white rounded-lg p-2.5 sm:p-3 shadow-sm group hover:bg-gray-50 hover:shadow-md transition-all">
                             <div class="w-16 h-12 sm:w-20 sm:h-14 lg:w-24 lg:h-16 bg-gray-200 rounded flex-shrink-0">
-                                <img src="{{ $pop->image_url }}" alt="{{ $pop->title }}" class="w-full h-full object-cover rounded">
+                                <img src="{{ $pop->image_url }}" alt="{{ $pop->title }}" class="w-full h-full object-cover rounded" loading="lazy">
                             </div>
                             <div class="flex-1 min-w-0">
                                 <div class="inline-flex items-center space-x-2">
@@ -125,7 +147,7 @@
                     @foreach($relatedNews as $related)
                     <a href="{{ route('news.detail', $related->slug) }}" class="block group">
                         <div class="relative mb-4">
-                            <img src="{{ $related->image_url }}" alt="{{ $related->title }}" class="w-full aspect-video object-cover rounded">
+                            <img src="{{ $related->image_url }}" alt="{{ $related->title }}" class="w-full aspect-video object-cover rounded" loading="lazy">
                         </div>
                         <h2 class="inline-block text-red-600 font-bold border-b-2 border-yellow-500 pb-1">{{ $related->category->name }}</h2>
                         <h3 class="font-bold text-lg mb-2 group-hover:text-red-600 transition-colors line-clamp-2">{{ $related->title }}</h3>

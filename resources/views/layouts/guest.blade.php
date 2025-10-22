@@ -19,7 +19,7 @@
             <!-- Custom Logo -->
             <div class="mb-6">
                 <a href="/" class="flex items-center space-x-3">
-                    <img src="{{ asset('images/logo.png') }}" alt="CrimeWatch.ID" class="w-16 h-16" style="object-fit: contain;">
+                    <img src="{{ asset('images/logo.png') }}" alt="CrimeWatch.ID" class="w-16 h-16" style="object-fit: contain;" loading="eager">
                     <div>
                         <span class="text-red-600 font-bold text-2xl">CRIME</span>
                         <span class="text-yellow-500 font-bold text-2xl">WATCH.ID</span>

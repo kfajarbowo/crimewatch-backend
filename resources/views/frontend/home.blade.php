@@ -1,5 +1,14 @@
 @extends('frontend.layouts.app')
 
+@section('page-title', 'CrimeWatch.ID - Portal Berita Kriminal Terpercaya')
+@section('meta-description', 'CrimeWatch.ID adalah portal berita kriminal terpercaya yang menyajikan informasi terkini tentang kejahatan, penegakan hukum, dan keamanan masyarakat di Indonesia. Dapatkan berita terbaru tentang POLRI, kriminal, dan hukum.')
+@section('meta-keywords', 'berita kriminal, kejahatan, polisi, hukum, keamanan, Indonesia, POLRI, kriminal, penegakan hukum')
+@section('canonical-url', url('/'))
+
+@section('og-title', 'CrimeWatch.ID - Portal Berita Kriminal Terpercaya')
+@section('og-description', 'CrimeWatch.ID adalah portal berita kriminal terpercaya yang menyajikan informasi terkini tentang kejahatan, penegakan hukum, dan keamanan masyarakat di Indonesia.')
+@section('og-type', 'website')
+
 @section('content')
 <main class="container mx-auto px-3 sm:px-4 lg:px-6 py-4 sm:py-6">
     <!-- Featured News Section -->
@@ -14,7 +23,7 @@
                             <div class="featured-slide">
                                 <a href="{{ route('news.detail', $news->slug) }}" class="block">
                                     <div class="bg-gray-300 aspect-video sm:aspect-[16/9] relative">
-                                        <img src="{{ $news->image_url }}" alt="{{ $news->title }}" class="w-full h-full object-cover">
+                                        <img src="{{ $news->image_url }}" alt="{{ $news->title }}" class="w-full h-full object-cover" loading="lazy">
                                         <div class="absolute bottom-0 left-0 right-0 p-3 sm:p-4 lg:p-6 bg-gradient-to-t from-black via-black/70 to-transparent text-white">
                                             <span class="inline-block text-red-400 font-medium text-xs sm:text-sm border-b-2 border-yellow-500 pb-1 mb-2 sm:mb-3">{{ $news->category->name }}</span>
                                             <h1 class="text-lg sm:text-xl lg:text-2xl font-bold mb-1 sm:mb-2 line-clamp-2">{{ $news->title }}</h1>
@@ -54,7 +63,7 @@
                     @foreach($popularNews as $news)
                         <a href="{{ route('news.detail', $news->slug) }}" class="flex items-start space-x-3 bg-white rounded-lg p-2.5 sm:p-3 shadow-sm group hover:bg-gray-50 hover:shadow-md transition-all">
                             <div class="w-16 h-12 sm:w-20 sm:h-14 lg:w-24 lg:h-16 bg-gray-200 rounded flex-shrink-0">
-                                <img src="{{ $news->image_url }}" alt="{{ $news->title }}" class="w-full h-full object-cover rounded">
+                                <img src="{{ $news->image_url }}" alt="{{ $news->title }}" class="w-full h-full object-cover rounded" loading="lazy">
                             </div>
                             <div class="flex-1 min-w-0">
                                 <div class="inline-flex items-center space-x-2">
@@ -130,7 +139,7 @@
                         <a href="{{ route('news.detail', $news->slug) }}" class="block">
                             <div class="flex flex-col sm:flex-row">
                                 <div class="w-full sm:w-40 lg:w-48 h-48 sm:h-28 lg:h-32 flex-shrink-0">
-                                    <img src="{{ $news->image_url }}" alt="{{ $news->title }}" class="w-full h-full object-cover">
+                                    <img src="{{ $news->image_url }}" alt="{{ $news->title }}" class="w-full h-full object-cover" loading="lazy">
                                 </div>
                                 <div class="flex-1 p-3 sm:p-4">
                                     <span class="inline-block text-xs sm:text-sm text-red-600 font-medium border-b-2 border-yellow-500 pb-1">{{ $news->category->name }}</span>
@@ -156,7 +165,7 @@
                     @foreach($polriNews as $news)
                         <div class="flex items-start space-x-3 bg-white rounded-lg p-2.5 sm:p-3 shadow-sm hover:bg-gray-50 hover:shadow-md transition-all">
                             <div class="w-16 h-12 sm:w-20 sm:h-14 lg:w-24 lg:h-16 bg-gray-200 rounded flex-shrink-0">
-                                <img src="{{ $news->image_url }}" alt="{{ $news->title }}" class="w-full h-full object-cover rounded">
+                                <img src="{{ $news->image_url }}" alt="{{ $news->title }}" class="w-full h-full object-cover rounded" loading="lazy">
                             </div>
                             <div class="flex-1 min-w-0">
                                 <h3 class="font-medium text-xs sm:text-sm mb-1 line-clamp-2">{{ $news->title }}</h3>
@@ -177,7 +186,7 @@
                     @foreach($kriminalNews as $news)
                         <div class="flex items-start space-x-3 bg-white rounded-lg p-2.5 sm:p-3 shadow-sm hover:bg-gray-50 hover:shadow-md transition-all">
                             <div class="w-16 h-12 sm:w-20 sm:h-14 lg:w-24 lg:h-16 bg-gray-200 rounded flex-shrink-0">
-                                <img src="{{ $news->image_url }}" alt="{{ $news->title }}" class="w-full h-full object-cover rounded">
+                                <img src="{{ $news->image_url }}" alt="{{ $news->title }}" class="w-full h-full object-cover rounded" loading="lazy">
                             </div>
                             <div class="flex-1 min-w-0">
                                 <h3 class="font-medium text-xs sm:text-sm mb-1 line-clamp-2">{{ $news->title }}</h3>
@@ -203,7 +212,7 @@
                 <article class="mb-4 sm:mb-6">
                     <a href="{{ route('news.detail', $bhabinNews[0]->slug) }}" class="block group">
                         <div class="bg-gray-200 aspect-video rounded-lg mb-2 sm:mb-3 shadow-sm group-hover:shadow-md transition-shadow">
-                            <img src="{{ $bhabinNews[0]->image_url }}" alt="{{ $bhabinNews[0]->title }}" class="w-full h-full object-cover rounded-lg">
+                            <img src="{{ $bhabinNews[0]->image_url }}" alt="{{ $bhabinNews[0]->title }}" class="w-full h-full object-cover rounded-lg" loading="lazy">
                         </div>
                         <h3 class="font-bold text-sm sm:text-base lg:text-lg mb-1 sm:mb-2 group-hover:text-red-600 transition-colors line-clamp-2">{{ $bhabinNews[0]->title }}</h3>
                         <p class="text-xs sm:text-sm text-gray-500">{{ $bhabinNews[0]->published_at?->locale('id')?->translatedFormat('l, d F Y - H:i') }} WIB</p>
@@ -214,7 +223,7 @@
                     @foreach($bhabinNews->skip(1) as $news)
                         <article class="flex items-start space-x-2.5 sm:space-x-3 group hover:bg-gray-50 rounded-lg transition-colors">
                             <a href="{{ route('news.detail', $news->slug) }}" class="flex items-start space-x-2.5 sm:space-x-3 w-full p-1.5 sm:p-2">
-                                <img src="{{ $news->image_url }}" alt="{{ $news->title }}" class="w-16 h-12 sm:w-20 sm:h-15 rounded object-cover bg-gray-200 flex-shrink-0">
+                                <img src="{{ $news->image_url }}" alt="{{ $news->title }}" class="w-16 h-12 sm:w-20 sm:h-15 rounded object-cover bg-gray-200 flex-shrink-0" loading="lazy">
                                 <div class="min-w-0">
                                     <h4 class="font-medium text-xs sm:text-sm group-hover:text-red-600 transition-colors line-clamp-2">{{ $news->title }}</h4>
                                     <p class="text-xs text-gray-500 mt-1">{{ $news->published_at?->locale('id')?->translatedFormat('l, d F Y - H:i') }} WIB</p>
@@ -237,7 +246,7 @@
                 <article class="mb-4 sm:mb-6">
                     <a href="{{ route('news.detail', $lantasNews[0]->slug) }}" class="block group">
                         <div class="bg-gray-200 aspect-video rounded-lg mb-2 sm:mb-3 shadow-sm group-hover:shadow-md transition-shadow">
-                            <img src="{{ $lantasNews[0]->image_url }}" alt="{{ $lantasNews[0]->title }}" class="w-full h-full object-cover rounded-lg">
+                            <img src="{{ $lantasNews[0]->image_url }}" alt="{{ $lantasNews[0]->title }}" class="w-full h-full object-cover rounded-lg" loading="lazy">
                         </div>
                         <h3 class="font-bold text-sm sm:text-base lg:text-lg mb-1 sm:mb-2 group-hover:text-red-600 transition-colors line-clamp-2">{{ $lantasNews[0]->title }}</h3>
                         <p class="text-xs sm:text-sm text-gray-500">{{ $lantasNews[0]->published_at?->locale('id')?->translatedFormat('l, d F Y - H:i') }} WIB</p>
@@ -248,7 +257,7 @@
                     @foreach($lantasNews->skip(1) as $news)
                         <article class="flex items-start space-x-2.5 sm:space-x-3 group hover:bg-gray-50 rounded-lg transition-colors">
                             <a href="{{ route('news.detail', $news->slug) }}" class="flex items-start space-x-2.5 sm:space-x-3 w-full p-1.5 sm:p-2">
-                                <img src="{{ $news->image_url }}" alt="{{ $news->title }}" class="w-16 h-12 sm:w-20 sm:h-15 rounded object-cover bg-gray-200 flex-shrink-0">
+                                <img src="{{ $news->image_url }}" alt="{{ $news->title }}" class="w-16 h-12 sm:w-20 sm:h-15 rounded object-cover bg-gray-200 flex-shrink-0" loading="lazy">
                                 <div class="min-w-0">
                                     <h4 class="font-medium text-xs sm:text-sm group-hover:text-red-600 transition-colors line-clamp-2">{{ $news->title }}</h4>
                                     <p class="text-xs text-gray-500 mt-1">{{ $news->published_at?->locale('id')?->translatedFormat('l, d F Y - H:i') }} WIB</p>
@@ -271,7 +280,7 @@
                 <article class="mb-4 sm:mb-6">
                     <a href="{{ route('news.detail', $politikNews[0]->slug) }}" class="block group">
                         <div class="bg-gray-200 aspect-video rounded-lg mb-2 sm:mb-3 shadow-sm group-hover:shadow-md transition-shadow">
-                            <img src="{{ $politikNews[0]->image_url }}" alt="{{ $politikNews[0]->title }}" class="w-full h-full object-cover rounded-lg">
+                            <img src="{{ $politikNews[0]->image_url }}" alt="{{ $politikNews[0]->title }}" class="w-full h-full object-cover rounded-lg" loading="lazy">
                         </div>
                         <h3 class="font-bold text-sm sm:text-base lg:text-lg mb-1 sm:mb-2 group-hover:text-red-600 transition-colors line-clamp-2">{{ $politikNews[0]->title }}</h3>
                         <p class="text-xs sm:text-sm text-gray-500">{{ $politikNews[0]->published_at?->locale('id')?->translatedFormat('l, d F Y - H:i') }} WIB</p>
@@ -282,7 +291,7 @@
                     @foreach($politikNews->skip(1) as $news)
                         <article class="flex items-start space-x-2.5 sm:space-x-3 group hover:bg-gray-50 rounded-lg transition-colors">
                             <a href="{{ route('news.detail', $news->slug) }}" class="flex items-start space-x-2.5 sm:space-x-3 w-full p-1.5 sm:p-2">
-                                <img src="{{ $news->image_url }}" alt="{{ $news->title }}" class="w-16 h-12 sm:w-20 sm:h-15 rounded object-cover bg-gray-200 flex-shrink-0">
+                                <img src="{{ $news->image_url }}" alt="{{ $news->title }}" class="w-16 h-12 sm:w-20 sm:h-15 rounded object-cover bg-gray-200 flex-shrink-0" loading="lazy">
                                 <div class="min-w-0">
                                     <h4 class="font-medium text-xs sm:text-sm group-hover:text-red-600 transition-colors line-clamp-2">{{ $news->title }}</h4>
                                     <p class="text-xs text-gray-500 mt-1">{{ $news->published_at?->locale('id')?->translatedFormat('l, d F Y - H:i') }} WIB</p>

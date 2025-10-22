@@ -11,7 +11,7 @@ use Illuminate\Support\Facades\Auth;
         <div class="bg-red-700 p-1">
             <div class="flex items-center justify-between">
                 <div class="flex items-center">
-                    <img src="{{ asset('images/logo.png') }}" alt="Logo" class="w-16 h-12" style="object-fit: contain; width: 25%; height: 25%;">
+                    <img src="{{ asset('images/logo.png') }}" alt="Logo" class="w-16 h-12" style="object-fit: contain; width: 25%; height: 25%;" loading="eager">
                     <div class="">
                         <span class="text-white font-bold text-lg">CRIME</span>
                         <span class="text-yellow-500 font-bold text-lg">WATCH.ID</span>
@@ -87,7 +87,7 @@ use Illuminate\Support\Facades\Auth;
                         </svg>
                     </button>
                     <a href="/" class="flex items-center">
-                        <img src="{{ asset('images/logo.png') }}" alt="Logo" class="w-16 h-16" style="object-fit: contain;">
+                        <img src="{{ asset('images/logo.png') }}" alt="Logo" class="w-16 h-16" style="object-fit: contain;" loading="eager">
                         <div class="">
                             <span class="text-white font-bold text-xl md:text-2xl">CRIME</span>
                             <span class="text-yellow-500 font-bold text-xl md:text-2xl">WATCH.ID</span>
