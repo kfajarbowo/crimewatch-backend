@@ -95,4 +95,15 @@ class News extends Model
         
         return [];
     }
+
+   
+    public function getRenderedContentAttribute(): string
+    {
+      
+        if (empty($this->content)) {
+            return '';
+        }
+
+        return $this->content;
+    }
 }
