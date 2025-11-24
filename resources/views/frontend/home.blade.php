@@ -34,7 +34,7 @@
                             </div>
                         @endforeach
                     </div>
-                    
+
                     <!-- Navigation Arrows -->
                     <button class="featured-nav featured-prev hidden sm:flex">
                         <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -46,7 +46,7 @@
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
                         </svg>
                     </button>
-                    
+
                     <!-- Dot Indicators -->
                     <div class="featured-dots">
                         @foreach($featuredNews as $key => $news)
@@ -80,13 +80,13 @@
     </section>
 
     <!-- TikTok Content Section -->
-    <section class="mb-8 sm:mb-12">
+    <!-- <section class="mb-8 sm:mb-12">
         <div class="flex justify-between items-center mb-3 sm:mb-4">
             <h2 class="text-lg sm:text-xl font-bold text-red-600">KONTEN TIKTOK TERBARU</h2>
             <a href="https://www.tiktok.com/@crimewatchid" class="text-gray-500 text-xs sm:text-sm hover:text-red-600 whitespace-nowrap">Lihat lainnya →</a>
         </div>
-        
-        <!-- TikTok Slider Container -->
+
+
         <div class="relative">
             <div id="tiktok-slider" class="flex overflow-x-auto pb-4 space-x-3 sm:space-x-4 hide-scrollbar snap-x snap-mandatory scroll-smooth">
                 @foreach($latestVideos as $video)
@@ -102,15 +102,15 @@
                                     <svg class="w-3 h-3 sm:w-4 sm:h-4 text-white" fill="currentColor" viewBox="0 0 24 24">
                                         <path d="M8 5v14l11-7z"/>
                                     </svg>
-                                    <!-- <span class="text-white text-xs ml-1">{{ $video->views }}</span> -->
+
                                 </div>
                             </div>
                         </div>
                     </div>
                 @endforeach
-            </div>
-            
-            <!-- Navigation Arrows -->
+            </div> -->
+
+
             <button id="tiktok-prev" class="absolute left-0 top-1/2 transform -translate-y-1/2 bg-black/50 text-white p-2 rounded-full hidden sm:flex items-center justify-center z-10">
                 <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/>
@@ -315,22 +315,22 @@
         const featuredPrev = document.querySelector('.featured-prev');
         const featuredNext = document.querySelector('.featured-next');
         const featuredDots = document.querySelectorAll('.featured-dot');
-        
+
         if (featuredSlider && featuredSlides.length > 0) {
             let currentSlide = 0;
-            
+
             // Update dots and arrows
             function updateSlider() {
                 featuredDots.forEach((dot, index) => {
                     dot.classList.toggle('active', index === currentSlide);
                 });
-                
+
                 if (featuredPrev && featuredNext) {
                     featuredPrev.style.display = currentSlide === 0 ? 'none' : 'flex';
                     featuredNext.style.display = currentSlide === featuredSlides.length - 1 ? 'none' : 'flex';
                 }
             }
-            
+
             // Go to specific slide
             function goToSlide(index) {
                 currentSlide = index;
@@ -340,35 +340,35 @@
                 });
                 updateSlider();
             }
-            
+
             // Next slide
             function nextSlide() {
                 if (currentSlide < featuredSlides.length - 1) {
                     goToSlide(currentSlide + 1);
                 }
             }
-            
+
             // Previous slide
             function prevSlide() {
                 if (currentSlide > 0) {
                     goToSlide(currentSlide - 1);
                 }
             }
-            
+
             // Event listeners for arrows
             if (featuredNext) {
                 featuredNext.addEventListener('click', nextSlide);
             }
-            
+
             if (featuredPrev) {
                 featuredPrev.addEventListener('click', prevSlide);
             }
-            
+
             // Event listeners for dots
             featuredDots.forEach((dot, index) => {
                 dot.addEventListener('click', () => goToSlide(index));
             });
-            
+
             // Auto slide every 5 seconds
             setInterval(() => {
                 if (currentSlide < featuredSlides.length - 1) {
@@ -377,31 +377,31 @@
                     goToSlide(0);
                 }
             }, 5000);
-            
+
             // Update slider on scroll
             featuredSlider.addEventListener('scroll', () => {
                 const scrollPos = featuredSlider.scrollLeft;
                 const slideWidth = featuredSlider.offsetWidth;
                 const newSlide = Math.round(scrollPos / slideWidth);
-                
+
                 if (newSlide !== currentSlide) {
                     currentSlide = newSlide;
                     updateSlider();
                 }
             });
-            
+
             // Initialize slider
             updateSlider();
-            
+
             // Touch support for mobile
             let startX = 0;
             let scrollLeft = 0;
-            
+
             featuredSlider.addEventListener('touchstart', (e) => {
                 startX = e.touches[0].pageX;
                 scrollLeft = featuredSlider.scrollLeft;
             });
-            
+
             featuredSlider.addEventListener('touchmove', (e) => {
                 if (!startX) return;
                 const x = e.touches[0].pageX;
@@ -417,10 +417,10 @@
         const tiktokPrev = document.getElementById('tiktok-prev');
         const tiktokNext = document.getElementById('tiktok-next');
         const tiktokSlides = document.querySelectorAll('.tiktok-slide');
-        
+
         if (tiktokSlider && tiktokSlides.length > 0) {
             let currentTiktokSlide = 0;
-            
+
             // Go to specific TikTok slide
             function goToTiktokSlide(index) {
                 currentTiktokSlide = index;
@@ -432,50 +432,50 @@
                     });
                 }
             }
-            
+
             // Next TikTok slide
             function nextTiktokSlide() {
                 if (currentTiktokSlide < tiktokSlides.length - 1) {
                     goToTiktokSlide(currentTiktokSlide + 1);
                 }
             }
-            
+
             // Previous TikTok slide
             function prevTiktokSlide() {
                 if (currentTiktokSlide > 0) {
                     goToTiktokSlide(currentTiktokSlide - 1);
                 }
             }
-            
+
             // Event listeners for TikTok arrows
             if (tiktokNext) {
                 tiktokNext.addEventListener('click', nextTiktokSlide);
             }
-            
+
             if (tiktokPrev) {
                 tiktokPrev.addEventListener('click', prevTiktokSlide);
             }
-            
+
             // Update TikTok slider on scroll
             tiktokSlider.addEventListener('scroll', () => {
                 const scrollPos = tiktokSlider.scrollLeft;
                 const slideWidth = tiktokSlides[0].offsetWidth + 12;
                 const newSlide = Math.round(scrollPos / slideWidth);
-                
+
                 if (newSlide !== currentTiktokSlide && newSlide >= 0 && newSlide < tiktokSlides.length) {
                     currentTiktokSlide = newSlide;
                 }
             });
-            
+
             // Touch support for TikTok slider
             let tiktokStartX = 0;
             let tiktokScrollLeft = 0;
-            
+
             tiktokSlider.addEventListener('touchstart', (e) => {
                 tiktokStartX = e.touches[0].pageX;
                 tiktokScrollLeft = tiktokSlider.scrollLeft;
             });
-            
+
             tiktokSlider.addEventListener('touchmove', (e) => {
                 if (!tiktokStartX) return;
                 const x = e.touches[0].pageX;
